@@ -451,11 +451,11 @@ textarea:focus {
 /*----------------------------------------*/
 /*Home One | Slider Background Image*/
 .bg-1, .bg-2, .bg-3 {
-	background-image: url(images/slider/1.jpg);
+	background-image: url(images/slider/01.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
-	min-height: 475px;
+	min-height: 550px;
 	width: 100%;
 }
 .bg-2 {
@@ -793,6 +793,7 @@ textarea:focus {
 	right: 0;
 }
 .special-product-active .product-image {
+	background-color: grey;
 	position: relative;
 	padding: 0 10px;
 }
@@ -4975,6 +4976,7 @@ span.required {
   min-height: 30px;
 }
 .product-image > a img {
+	height: 200px;
   width: 100%;
 }
 .shop-products-wrapper .tab-content .tab-pane.active {
