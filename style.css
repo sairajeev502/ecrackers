@@ -1777,7 +1777,7 @@ textarea:focus {
 	font-family: fontawesome;
 	font-size: 18px;
 	transition: all 0.3s ease-in-out;
-	color: #242424;
+	color: #ffffff;
 }
 .hb-menu nav > ul > li:nth-child(n+5) > a::after {
 	content: none;
@@ -1932,7 +1932,7 @@ textarea:focus {
 }
 /*Sticky*/
 .header-sticky.sticky {
-	background: rgba(254,215,0,.8);
+	background:#000000;
 	left: 0;
 	position: fixed;
 	right: 0;
