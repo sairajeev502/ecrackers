@@ -314,15 +314,15 @@ textarea {
 /*----------------------------------------*/
 button.li-btn {
 	border: none;
-	background: #000000;
-	color: #FFFFFF;
-	font-size: 20px;
+	background:transparent;
+	color: #000000;
+	font-size: 25px;
 	width: 45px;
-	border-radius: 0 2px 2px 0;
-	height: 45px;
+	border-radius: 49px;
+	height: 42px;
 	line-height: 45px;
 	position: absolute;
-	right: -1px;
+	right: -0px;
 	top: -1px;
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
@@ -1443,7 +1443,7 @@ textarea:focus {
 	display: flex;
 	position: relative;
 	background: #fff;
-	border-radius: 5px;
+	border-radius: 14px;
 	border: 1px solid #e1e1e1;
 	min-width: 638px;
 	height: 45px;
@@ -1517,14 +1517,15 @@ textarea:focus {
 	transition: all 0.3s ease-in-out;
 }
 .hm-wishlist > a:hover {
-	border-color: #fed700;
-	color: #fed700;
+	border-color: #000000;
+	color: #000000;
 }
 /*Header Middle Minicart*/
 .hm-minicart {
 		display: inline-block;
 		position: relative;
 }
+
 .hm-minicart-trigger {
 		border-radius: 100%;
 		background:  #f50057;
@@ -1536,6 +1537,10 @@ textarea:focus {
 		position: relative;
 		/* padding: 0 15px 0 55px; */
 }
+.item-icon:hover {
+	border-color: #000;
+	color: #000000;
+}
 .item-icon::before {
 		content: "\f291";
 		position: absolute;
@@ -1545,6 +1550,7 @@ textarea:focus {
 		display: block;
 		font-size: 23px;
 }
+
 .item-text {
 		position: relative;
 		line-height: 45px;
