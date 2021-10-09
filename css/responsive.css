@@ -186,7 +186,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	 position: relative;
 	}
 	.cat-mega-menu > li.cat-mega-title > a:after{
-	    display: none;        
+	    display: none;
 	}
 	.cat-mega-menu > li.cat-mega-title > a,
 	.cat-mega-menu > li > ul > li > a,
@@ -205,7 +205,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	.cat-mega-menu > li.cat-mega-title:last-child > a,
 	.cat-mega-menu > li > ul > li:last-child > a,
 	.cat-dropdown > li:last-child > a{
-	    border-bottom: 0;        
+	    border-bottom: 0;
 	}
 }
 /*Large Mobile Device :576px */
@@ -258,9 +258,9 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 		left: -10px;
 		top: -10px;
 	}
-	.ht-menu > li .ht-setting-trigger span::after, 
-	.ht-menu > li .ht-currency-trigger span::after, 
-	.ht-menu > li .ht-language-trigger span::after, 
+	.ht-menu > li .ht-setting-trigger span::after,
+	.ht-menu > li .ht-currency-trigger span::after,
+	.ht-menu > li .ht-language-trigger span::after,
 	.hm-minicart-trigger .item-text::after {
 		font-size: 12px;
 		margin-top: 2px;
@@ -377,7 +377,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	 position: relative;
 	}
 	.cat-mega-menu > li.cat-mega-title > a:after{
-	    display: none;        
+	    display: none;
 	}
 	.cat-mega-menu > li.cat-mega-title > a,
 	.cat-mega-menu > li > ul > li > a,
@@ -396,7 +396,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	.cat-mega-menu > li.cat-mega-title:last-child > a,
 	.cat-mega-menu > li > ul > li:last-child > a,
 	.cat-dropdown > li:last-child > a{
-	    border-bottom: 0;        
+	    border-bottom: 0;
 	}
 }
 /* Small Mobile Device :480px. */
@@ -491,7 +491,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	.li-product-menu > li > a > span {
 		font-size: 14px;
 	}
-	.li-product-menu > li > a span::before, 
+	.li-product-menu > li > a span::before,
 	.li-product-menu > li > a.active span::before {
 		bottom: -13px;
 	}
@@ -589,7 +589,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	 position: relative;
 	}
 	.cat-mega-menu > li.cat-mega-title > a:after{
-	    display: none;        
+	    display: none;
 	}
 	.cat-mega-menu > li.cat-mega-title > a,
 	.cat-mega-menu > li > ul > li > a,
@@ -608,7 +608,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	.cat-mega-menu > li.cat-mega-title:last-child > a,
 	.cat-mega-menu > li > ul > li:last-child > a,
 	.cat-dropdown > li:last-child > a{
-	    border-bottom: 0;        
+	    border-bottom: 0;
 	}
 }
 /* Extra Small Mobile Device :320px. */
@@ -662,8 +662,8 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 		margin-right: 15px;
 	}
 	.cart-item-count {
-		top: -30px;
-		left: -59px;
+		top: -12px;
+		/* left: -59px; */
 		min-width: 26px;
 		font-size: 12px;
 	}
@@ -726,7 +726,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	}
 	.li-sub-category-list > li > a {
 		margin: 0 5px 0 5px;
-	} 
+	}
 	.li-section-title > h2 > span::before {
 		bottom: -22px;
 	}
@@ -881,7 +881,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	 position: relative;
 	}
 	.cat-mega-menu > li.cat-mega-title > a:after{
-	    display: none;        
+	    display: none;
 	}
 	.cat-mega-menu > li.cat-mega-title > a,
 	.cat-mega-menu > li > ul > li > a,
@@ -900,7 +900,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	.cat-mega-menu > li.cat-mega-title:last-child > a,
 	.cat-mega-menu > li > ul > li:last-child > a,
 	.cat-dropdown > li:last-child > a{
-	    border-bottom: 0;        
+	    border-bottom: 0;
 	}
 	/*Blog Details Page*/
 	.li-blog-single-item .li-blog-content .li-blog-details h3 {
