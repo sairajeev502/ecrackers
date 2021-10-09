@@ -1505,9 +1505,10 @@ textarea:focus {
 	position: relative;
 }
 .hm-wishlist > a {
-	border: 1px solid #e1e1e1;
-	font-size: 20px;
-	color: #242424;
+	border-radius:  100%;
+	background:  #f50057;
+	font-size: 23px;
+	color: #FFFFFF;
 	width: 45px;
 	text-align: center;
 	height: 45px;
@@ -1525,14 +1526,15 @@ textarea:focus {
 		position: relative;
 }
 .hm-minicart-trigger {
-		border-radius: 2px;
+		border-radius: 100%;
 		background:  #f50057;
 		color: #fff;
 		height: 45px;
+		width:45px;
 		cursor: pointer;
 		display: block;
 		position: relative;
-		padding: 0 15px 0 55px;
+		/* padding: 0 15px 0 55px; */
 }
 .item-icon::before {
 		content: "\f291";
@@ -1541,7 +1543,7 @@ textarea:focus {
 		left: 10px;
 		top: 6px;
 		display: block;
-		font-size: 20px;
+		font-size: 23px;
 }
 .item-text {
 		position: relative;
@@ -1559,8 +1561,8 @@ textarea:focus {
 }
 .cart-item-count {
 		position: absolute;
-		top: -25px;
-		left: -60px;
+		top: -13px;
+		left: -5px;
 		display: block;
 		overflow: hidden;
 		min-width: 26px;
