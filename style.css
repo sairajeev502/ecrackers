@@ -1932,7 +1932,7 @@ textarea:focus {
 }
 /*Sticky*/
 .header-sticky.sticky {
-	background: rgba(254,215,0,.8);
+	background: black;
 	left: 0;
 	position: fixed;
 	right: 0;
