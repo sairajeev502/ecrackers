@@ -1526,7 +1526,7 @@ textarea:focus {
 }
 .hm-minicart-trigger {
 		border-radius: 2px;
-		background: #e80f0f;
+		background:  #f50057;
 		color: #fff;
 		height: 45px;
 		cursor: pointer;
@@ -1567,8 +1567,8 @@ textarea:focus {
 		line-height: 26px;
 		font-size: 12px;
 		font-weight: 400;
-		color: #242424;
-		background: #fed700;
+		color: #FFFFFF;
+		background: #000000;
 		text-align: center;
 		border-radius: 100%;
 }
