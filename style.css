@@ -78,6 +78,7 @@ body {
 	font-style: normal;
 	font-weight: normal;
 	overflow-x: hidden;
+
 }
 a {
 	color: #a4a4a4;
@@ -314,15 +315,15 @@ textarea {
 /*----------------------------------------*/
 button.li-btn {
 	border: none;
-	background: #000000;
-	color: #FFFFFF;
-	font-size: 20px;
+	background:transparent;
+	color: #000000;
+	font-size: 25px;
 	width: 45px;
-	border-radius: 0 2px 2px 0;
-	height: 45px;
+	border-radius: 49px;
+	height: 42px;
 	line-height: 45px;
 	position: absolute;
-	right: -1px;
+	right: -0px;
 	top: -1px;
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
@@ -1443,7 +1444,7 @@ textarea:focus {
 	display: flex;
 	position: relative;
 	background: #fff;
-	border-radius: 5px;
+	border-radius: 14px;
 	border: 1px solid #e1e1e1;
 	min-width: 638px;
 	height: 45px;
@@ -1506,7 +1507,7 @@ textarea:focus {
 }
 .hm-wishlist > a {
 	border-radius:  100%;
-	background:  #f50057;
+	background:  #C11E48;
 	font-size: 23px;
 	color: #FFFFFF;
 	width: 45px;
@@ -1517,17 +1518,18 @@ textarea:focus {
 	transition: all 0.3s ease-in-out;
 }
 .hm-wishlist > a:hover {
-	border-color: #fed700;
-	color: #fed700;
+	border-color: #000000;
+	color: #000000;
 }
 /*Header Middle Minicart*/
 .hm-minicart {
 		display: inline-block;
 		position: relative;
 }
+
 .hm-minicart-trigger {
 		border-radius: 100%;
-		background:  #f50057;
+		background:  #C11E48;
 		color: #fff;
 		height: 45px;
 		width:45px;
@@ -1535,6 +1537,10 @@ textarea:focus {
 		display: block;
 		position: relative;
 		/* padding: 0 15px 0 55px; */
+}
+.item-icon:hover {
+	border-color: #000;
+	color: #000000;
 }
 .item-icon::before {
 		content: "\f291";
@@ -1545,6 +1551,7 @@ textarea:focus {
 		display: block;
 		font-size: 23px;
 }
+
 .item-text {
 		position: relative;
 		line-height: 45px;
@@ -1737,7 +1744,7 @@ textarea:focus {
 }
 /*Header Bottom Menu*/
 .header-bottom {
-		background: #000000;
+		background: #0A1546;
 		margin-bottom: 20px;
 }
 .hb-menu > nav > ul {
@@ -1760,7 +1767,7 @@ textarea:focus {
 }
 .hb-menu-2 nav > ul > li > a {
 	display: flex;
-	color: #242424;
+	color: #24242;
 	text-transform: uppercase;
 	font-size: 14px;
 	line-height: 35px;
@@ -1795,7 +1802,7 @@ textarea:focus {
 	font-weight: 400;
 	font-size: 18px;
 	font-family: fontawesome;
-	color: #242424;
+	color: #24242;
 	transition: all 0.3s ease-in-out;
 }
 .ht-menu > li:hover .ht-currency-trigger span,
@@ -1934,7 +1941,7 @@ textarea:focus {
 }
 /*Sticky*/
 .header-sticky.sticky {
-	background:#000000;
+	background:#0A1546;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -4005,7 +4012,7 @@ thead {
 	font-weight: 400;
 	text-transform: uppercase;
 	color: #ffffff;
-	background-color: #363f4d;
+	background-color: #C11E48;
 	border-radius: 3px;
 	transition: all 0.3s ease-in-out;
 }
