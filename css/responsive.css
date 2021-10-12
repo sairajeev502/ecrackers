@@ -638,7 +638,7 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 	}
 	/*Header Middle*/
 	.logo {
-		text-align: center;
+		/* text-align: center; */
 	}
 	.hm-searchbox {
 		min-width: 268px;
