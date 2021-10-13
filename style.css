@@ -835,9 +835,9 @@ textarea:focus {
 .mobile-menu-area .mobile-menu .mean-bar .meanmenu-reveal,
 .mobile-menu-area-4 .mobile-menu .mean-bar .meanmenu-reveal {
 	position: absolute;
-	top: -75px;
+	top: -170px;
 	left: auto !important;
-	right: -12px !important;
+	right: -21px !important;
 }
 .mobile-menu-area-4 .mobile-menu .mean-bar .meanmenu-reveal {
 	color: #ffffff;
