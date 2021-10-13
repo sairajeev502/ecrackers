@@ -106,7 +106,7 @@
   padding-top: 0.5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-/* } */ 
+/* } */
 body {
 	color: #242424;
 	font-family: 'Rubik', sans-serif;
@@ -115,6 +115,13 @@ body {
 	font-weight: normal;
 	overflow-x: hidden;
 	background-color: #ffffff;
+}
+#cc{
+
+
+height:380px;
+width:1400px;
+margin-left:60px;
 }
 a {
 	color: #a4a4a4;
