@@ -1,5 +1,5 @@
 const express = require("express");
-//const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -11,14 +11,19 @@ app.use(express.static("public"));
 app.use(express.json());
 app.set("view engine", "ejs");
 
-//const dbURI = process.env.MONGODB_URI
-//mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: false })
-//.then(_ =>
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-//)
-//.catch(err => console.log(err))
+const dbURI = process.env.MONGODB_URI;
+
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    })
+  )
+  .catch((err) => console.log(err));
 
 app.get("/", (_, res) => res.render("index"));
 app.get("/about-us", (_, res) => res.render("about-us"));
@@ -54,4 +59,6 @@ app.get("/single-product-tab-style-top", (_, res) =>
   res.render("single-product-tab-style-top")
 );
 
-//app.get("/", (_, res) => res.render("404"));
+app.use((_, res, __) => {
+  res.status(404).render("404");
+});
