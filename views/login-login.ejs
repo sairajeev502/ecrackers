@@ -389,17 +389,17 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mb-30">
                             <!-- Login Form s-->
-                            <form action="#" >
+                            <form id="loginForm" action="#" >
                                 <div class="login-form">
                                     <h4 class="login-title">Login</h4>
                                     <div class="row">
                                         <div class="col-md-12 col-12 mb-20">
                                             <label>Email Address*</label>
-                                            <input class="mb-0" type="email" placeholder="Email Address">
+                                            <input name="email" class="mb-0" type="email" placeholder="Email Address">
                                         </div>
                                         <div class="col-12 mb-20">
                                             <label>Password</label>
-                                            <input class="mb-0" type="password" placeholder="Password">
+                                            <input name="password" class="mb-0" type="password" placeholder="Password">
                                         </div>
                                         <div class="col-md-8">
                                             <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
@@ -558,6 +558,33 @@
                 <!-- Footer Static Middle Area End Here -->
 
             </div>
+            <script>
+                const loginForm = document.getElementById('loginForm')
+                loginForm.addEventListener('submit', async e => {
+                    e.preventDefault()
+
+                    const email = loginForm.email.value
+                    const password = loginForm.password.value
+
+                    try {
+                        const res = await fetch('/login', {
+                            method: 'POST',
+                            body: JSON.stringify({ email, password }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                        const data = await res.json()
+                        if (data.err)
+                            alert(JSON.stringify(data.err, null, 2))
+                        else {
+                            alert("Successfully logged in")
+                        }
+                    } catch (e) {
+                        console.log(e)
+                    }
+                })
+            </script>
         <!-- Body Wrapper End Here -->
         <!-- jQuery-V1.12.4 -->
         <script src="js/vendor/jquery-1.12.4.min.js"></script>

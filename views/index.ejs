@@ -3074,6 +3074,15 @@
             </div>
             <!-- Quick View | Modal Area End Here -->
         </div>
+        <script>
+            const addToCarts = document.querySelectorAll(".add-cart")
+
+            addToCarts.forEach(addToCart => {
+                addToCart.addEventListener('click', e => {
+                    console.log(e)
+                })
+            })
+        </script>
         <!-- Body Wrapper End Here -->
         <!-- jQuery-V1.12.4 -->
         <script src="js/vendor/jquery-1.12.4.min.js"></script>

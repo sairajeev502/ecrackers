@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+const authRoutes = require("./routes/authRoutes");
 const app = express();
 
 require("dotenv").config();
@@ -12,7 +13,6 @@ app.use(express.json());
 app.set("view engine", "ejs");
 
 const dbURI = process.env.MONGODB_URI;
-
 mongoose
   .connect(dbURI, {
     useNewUrlParser: true,
@@ -59,6 +59,8 @@ app.get("/single-product-tab-style-top", (_, res) =>
   res.render("single-product-tab-style-top")
 );
 
-app.use((_, res, __) => {
-  res.status(404).render("404");
-});
+app.use(authRoutes);
+
+//app.use((_, res, __) => {
+//res.status(404).render("404");
+//});
