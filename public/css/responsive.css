@@ -630,8 +630,17 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 		padding: 0 15px;
 		display: block;
 	}
+	.setting{
+		width: 102px;
+	}
+	.ht-setting{
+		right:-40px;
+	}
+
 	.ht-setting-list > li > a {
 		padding: 0 5px;
+		margin-left: 30px;
+
 	}
 	.minicart {
 		left: -59px;

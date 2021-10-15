@@ -33,6 +33,10 @@ app.get("/index-3", (_, res) => res.render("index-3"));
 
 app.get("/login-login", (_, res) => res.render("login-login"));
 app.get("/login-register", (_, res) => res.render("login-register"));
+app.get("/vendor-login", (_, res) => res.render("vendor-login"));
+app.get("/vendor-register", (_, res) => res.render("vendor-register"));
+app.get("/admin-login", (_, res) => res.render("admin-login"));
+
 
 app.get("/blog-3-column", (_, res) => res.render("blog-3-column"));
 app.get("/blog-audio-format", (_, res) => res.render("blog-audio-format"));
