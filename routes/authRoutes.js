@@ -28,20 +28,19 @@ const createToken = (id) =>
   });
 
 const register_post = async (req, res) => {
-  const { firstName, lastName, email } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   try {
     const user = await User.create({
       firstName,
       lastName,
       email,
+      password,
     });
 
     res.status(201).json({ user });
   } catch (err) {
-    if (err.message.includes("duplicate")) {
-      res.status(400).json({ error: "Phone no. already registered" });
-    }
+    res.status(400).json({ err });
   }
 };
 
@@ -62,15 +61,7 @@ const admin_post = async (req, res) => {
   }
 };
 
-router.get("/register", register_get);
 router.post("/register", register_post);
-router.get("/admin", admin_get);
 router.post("/admin", admin_post);
-router.post("/message", message_post);
-router.post("/studedit", checkAdmin, studedit_post);
-router.post("/all", checkAdmin, allStudents);
-router.post("/batch", batchDetails);
-router.post("/closebatch", checkAdmin, batchEdit);
-router.post("/reregister", reRegister);
 
 module.exports = router;
