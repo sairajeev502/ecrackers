@@ -36,6 +36,7 @@ app.get("/login-register", (_, res) => res.render("login-register"));
 app.get("/vendor-login", (_, res) => res.render("vendor-login"));
 app.get("/vendor-register", (_, res) => res.render("vendor-register"));
 app.get("/admin-login", (_, res) => res.render("admin-login"));
+app.get("/my-profile", (_, res) => res.render("my-profile"));
 
 
 app.get("/blog-3-column", (_, res) => res.render("blog-3-column"));
@@ -61,6 +62,7 @@ app.get("/single-product", (_, res) => res.render("single-product"));
 app.get("/single-product-sale", (_, res) => res.render("single-product-sale"));
 app.get("/single-product-tab-style-top", (_, res) =>
   res.render("single-product-tab-style-top")
+
 );
 
 app.use(authRoutes);
