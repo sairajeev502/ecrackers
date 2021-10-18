@@ -923,3 +923,30 @@ Note: responsive.css, All Responsive CSS Style For This Theme Included In This F
 /*----------------------------------------------------------------------------------------------------*/
 /*------------------------------------------> The End <-----------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
+@media (min-width:480px) and (max-width:767px){
+	.cart-item-count{
+		top:-12px;
+		left:-5px;
+	}
+	.item-icon::before{
+		top:7px;
+		font-size: 22px;
+		left:12px;
+	}
+}
+@media (min-width:480px) and (max-width:524px){
+	#log{
+   margin-left:20px;
+	 font-size: 10px;
+	}
+	.hm-searchbox{
+		min-width:370px;
+		margin-left: 50px;
+	}
+}
+@media (min-width:479px) and (max-width:480px){
+	.hm-searchbox{
+		min-width:382px;
+		margin-left: 44px;
+	}
+}

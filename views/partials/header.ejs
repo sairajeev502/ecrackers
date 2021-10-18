@@ -52,6 +52,17 @@
             <header>
                 <!-- Begin Header Top Area -->
                 <style type="text/css" media="screen">
+                @media (min-width:480px) and (max-width:524px){
+                	#log{
+                   margin-left:-416px;
+                	 height: 45px;
+                   width:45px;
+                	}
+                	.hm-searchbox{
+                		min-width:370px;
+                		margin-left: 50px;
+                	}
+                }
                     @media (max-width: 525px) {
                         .header-top {
                             display: none;
@@ -61,17 +72,19 @@
                           height:200px;
                           width:358px;
                         }
-                        #log{
-                          height: 45px;
-                          width: 45px;
-                          margin-left: -2px;
-                        }
                         .hm-searchbox{
                           margin-left: 45px;
                           margin-top: -75px;
                           width:8px;
                         }
 
+                    }
+                    @media(max-width:479px){
+                      #log{
+                        height: 45px;
+                        width: 45px;
+                        margin-left: -2px;
+                      }
                     }
 
 
