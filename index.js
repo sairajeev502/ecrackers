@@ -38,6 +38,7 @@ app.get("/vendor-register", (_, res) => res.render("vendor-register"));
 app.get("/admin-login", (_, res) => res.render("admin-login"));
 app.get("/my-profile", (_, res) => res.render("my-profile"));
 
+app.get("/vendor-dashboard", (_, res) => res.render("vendorDashboard"));//vendor Dashboard
 
 app.get("/blog-3-column", (_, res) => res.render("blog-3-column"));
 app.get("/blog-audio-format", (_, res) => res.render("blog-audio-format"));
