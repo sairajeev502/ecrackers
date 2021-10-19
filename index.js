@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/authRoutes");
+const { checkUser, localProducts } = require("./middlewares/authMiddleware");
 const app = express();
 
 require("dotenv").config();
@@ -10,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 app.use(express.json());
+app.use(cookieParser());
 app.set("view engine", "ejs");
 
 const dbURI = process.env.MONGODB_URI;
@@ -25,7 +28,7 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get("/", (_, res) => res.render("index"));
+app.get("/", checkUser, (_, res) => res.render("index"));
 app.get("/about-us", (_, res) => res.render("about-us"));
 app.get("/contact", (_, res) => res.render("contact"));
 app.get("/faq", (_, res) => res.render("faq"));
@@ -37,7 +40,6 @@ app.get("/vendor-login", (_, res) => res.render("vendor-login"));
 app.get("/vendor-register", (_, res) => res.render("vendor-register"));
 app.get("/admin-login", (_, res) => res.render("admin-login"));
 app.get("/my-profile", (_, res) => res.render("my-profile"));
-
 
 app.get("/blog-3-column", (_, res) => res.render("blog-3-column"));
 app.get("/blog-audio-format", (_, res) => res.render("blog-audio-format"));
@@ -62,7 +64,6 @@ app.get("/single-product", (_, res) => res.render("single-product"));
 app.get("/single-product-sale", (_, res) => res.render("single-product-sale"));
 app.get("/single-product-tab-style-top", (_, res) =>
   res.render("single-product-tab-style-top")
-
 );
 
 app.use(authRoutes);
