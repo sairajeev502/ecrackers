@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
   lastName: String,
   email: strRequired,
   password: strRequired,
+  orders: {
+    type: [String],
+    default: [],
+  },
 });
 
 userSchema.pre("save", async function (next) {
