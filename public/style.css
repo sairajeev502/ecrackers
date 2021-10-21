@@ -2869,20 +2869,20 @@ a after{
 	margin: 20px 0 25px;
 	font-size: 14px;
 	line-height: 24px;
-	color: #888;
+	color: black;
 }
 .footer-static-middle .des > li {
-	color: #888;
+	color: black;
 	font-size: 14px;
 	margin: 0;
 	font-weight: 400;
 	line-height: 24px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 .footer-static-middle ul.des > li span {
 	text-transform: uppercase;
 	font-weight: 500;
-	font-size: 12px;
+	font-size: 10px;
 }
 /*Footer Block*/
 .footer-block > h3 {
@@ -2892,7 +2892,7 @@ a after{
 	color: #242424;
 	margin: 0 0 15px 0;
 	cursor: pointer;
-	padding-top: 20px;
+	padding-top: 10px;
 	text-transform: capitalize;
 }
 .footer-block > ul > li {
