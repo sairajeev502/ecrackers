@@ -84,6 +84,7 @@ const cartUpdate = async (req, res) => {
   }
 };
 
+
 router.post("/register", register_post);
 router.post("/login", login_post);
 router.post("/cartUpdate", cartUpdate);
