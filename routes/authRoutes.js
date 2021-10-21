@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { products } = require("../models/Product");
 
 const router = Router();
 
@@ -54,7 +55,39 @@ const login_post = async (req, res) => {
   }
 };
 
+const cartDetails = async (req, res) => {
+  const { _id } = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    const orders = user.orders.map((e) => {
+      return products.filter((product) => product.id === e)[0];
+    });
+
+    res.status(200).json({ orders });
+  } catch (e) {
+    res.status(400).json({ e });
+  }
+};
+
+const cartUpdate = async (req, res) => {
+  const { id, uid: _id } = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    const orders = [...new Set([...user.orders, id].filter(Boolean))];
+    await User.findOneAndUpdate({ _id }, { orders });
+    res.status(200).json(orders);
+  } catch (e) {
+    console.log({ e });
+    res.status(400).json({ e });
+  }
+};
+
+
 router.post("/register", register_post);
 router.post("/login", login_post);
+router.post("/cartUpdate", cartUpdate);
+router.post("/cartDetails", cartDetails);
 
 module.exports = router;

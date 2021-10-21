@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const products = require("../models/Product");
+const { products } = require("../models/Product");
 
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -24,10 +24,11 @@ const checkUser = (req, res, next) => {
   }
 };
 
-const localProducts = async (req, res, next) => {
-  //const newUsers = await User.find({ isVerified: false });
+const localProducts = (req, res, next) => {
   res.locals.products = products;
   next();
 };
 
-module.exports = { checkUser, localProducts };
+const userCartItems = async (req, res, next) => {};
+
+module.exports = { checkUser, localProducts, userCartItems };

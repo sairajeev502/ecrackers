@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/authRoutes");
-const { checkUser, localProducts } = require("./middlewares/authMiddleware");
+const {
+  checkUser,
+  localProducts,
+  userCartItems,
+} = require("./middlewares/authMiddleware");
 const app = express();
 
 require("dotenv").config();
@@ -41,7 +45,7 @@ app.get("/vendor-register", (_, res) => res.render("vendor-register"));
 app.get("/admin-login", (_, res) => res.render("admin-login"));
 app.get("/my-profile", (_, res) => res.render("my-profile"));
 
-app.get("/vendor-dashboard", (_, res) => res.render("vendorDashboard"));//vendor Dashboard
+app.get("/vendor-dashboard", (_, res) => res.render("vendorDashboard")); //vendor Dashboard
 
 app.get("/blog-3-column", (_, res) => res.render("blog-3-column"));
 app.get("/blog-audio-format", (_, res) => res.render("blog-audio-format"));
@@ -59,7 +63,9 @@ app.get("/blog-video-format", (_, res) => res.render("blog-video-format"));
 app.get("/checkout", (_, res) => res.render("checkout"));
 app.get("/compare", (_, res) => res.render("compare"));
 app.get("/wishlist", (_, res) => res.render("wishlist"));
-app.get("/shop-left-sidebar", (_, res) => res.render("shop-left-sidebar"));
+app.get("/shop-left-sidebar", checkUser, localProducts, (_, res) =>
+  res.render("shop-left-sidebar")
+);
 app.get("/shop-list", (_, res) => res.render("shop-list"));
 app.get("/shopping-cart", (_, res) => res.render("shopping-cart"));
 app.get("/single-product", (_, res) => res.render("single-product"));
