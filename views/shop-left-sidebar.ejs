@@ -587,8 +587,8 @@
                     try {
                         const res = await fetch('/cartUpdate', {
                             method: 'POST',
-                            body: JSON.stringify({ 
-                                id: e.target.id, 
+                            body: JSON.stringify({
+                                id: e.target.id,
                                 uid: e.target.getAttribute("data-uid")
                             }),
                             headers: {
