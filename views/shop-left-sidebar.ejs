@@ -13,6 +13,8 @@
             </div>
             <!-- Li's Breadcrumb Area End Here -->
             <!-- Begin Li's Content Wraper Area -->
+
+            
             <style type="text/css">
                 .add-to-cart-link {
                     cursor: pointer;
@@ -587,8 +589,8 @@
                     try {
                         const res = await fetch('/cartUpdate', {
                             method: 'POST',
-                            body: JSON.stringify({ 
-                                id: e.target.id, 
+                            body: JSON.stringify({
+                                id: e.target.id,
                                 uid: e.target.getAttribute("data-uid")
                             }),
                             headers: {
