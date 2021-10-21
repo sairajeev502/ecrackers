@@ -1819,8 +1819,11 @@ textarea:focus {
 	padding: 8px 0;
 }
 .hb-menu nav > ul > li:hover > a,
-.hb-menu nav > ul > li:hover > a::after {
+.hb-menu nav > ul > li:hover  {
 		color: #ffffff;
+}
+a after{
+	color: #242424;
 }
 .hb-menu nav > ul > li > a::after {
 	content: "\f107";
@@ -1830,7 +1833,7 @@ textarea:focus {
 	font-family: fontawesome;
 	font-size: 18px;
 	transition: all 0.3s ease-in-out;
-	color: #ffffff;
+	color: #242424;
 }
 .hb-menu nav > ul > li:nth-child(n+5) > a::after {
 	content: none;
