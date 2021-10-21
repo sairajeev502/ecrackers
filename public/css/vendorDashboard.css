@@ -12,7 +12,7 @@
 .mainContainer{width: 80%}
 .active1{margin-left: -20%;}
 .mainContainerWidth{width: 100%;}
-.active1 , .content ,.mainContainerWidth ,.mainContainer{transition: all 2s ease-in-out;}
+
 .coll{background-color: grey;}
 .Sales{background-color: #fde2e4;}
 .Orders{background-color: #bee1e6;}
@@ -39,7 +39,7 @@
 .Cracker4{background-color: #8093f1;}
 .selectButton:hover{
     background-color: rgb(255, 251, 245);
-    transition: all 500ms ease-in-out;
+
 }
 .profilePic{
     background-color: grey;
