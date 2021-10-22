@@ -34,11 +34,11 @@ mongoose
 
 app.get("/", checkUser, (_, res) => res.render("index"));
 app.get("/about-us", (_, res) => res.render("about-us"));
-app.get("/contact", (_, res) => res.render("contact"));
+app.get("/contact", checkUser, (_, res) => res.render("contact"));
 app.get("/faq", (_, res) => res.render("faq"));
 app.get("/index-3", (_, res) => res.render("index-3"));
 
-app.get("/login-login", (_, res) => res.render("login-login"));
+app.get("/login-login", checkUser, (_, res) => res.render("login-login"));
 app.get("/login-register", (_, res) => res.render("login-register"));
 app.get("/vendor-login", (_, res) => res.render("vendor-login"));
 app.get("/vendor-register", (_, res) => res.render("vendor-register"));

@@ -9,13 +9,13 @@
 
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img  id="cc" class="d-block" src="images/banner/gd.jpeg" alt="First slide">
+      <img  id="cc" class="d-block" src="images/banner/gd.png" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img id="cc"  class="d-block " src="images/banner/gdd.jpeg" alt="Second slide">
+      <img id="cc"  class="d-block " src="images/banner/gdd.png" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img id="cc"  class="d-block " src="images/banner/dg.jpeg" alt="Third slide">
+      <img id="cc"  class="d-block " src="images/banner/dg.png" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -594,7 +594,7 @@
                         <div class="col-lg-4 col-md-4 text-center">
                             <div class="single-banner">
                                 <a href="#">
-                                    <img src="images/banner/dg.jpeg" alt="Li's Static Banner">
+                                    <img src="images/banner/dg.png" alt="Li's Static Banner">
                                 </a>
                             </div>
                         </div>
@@ -603,7 +603,7 @@
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
                             <div class="single-banner">
                                 <a href="#">
-                                    <img  style="height:116px"src="images/banner/gdd.jpeg" alt="Li's Static Banner">
+                                    <img  style="height:116px"src="images/banner/gdd.png" alt="Li's Static Banner">
                                 </a>
                             </div>
                         </div>
@@ -612,7 +612,7 @@
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
                             <div class="single-banner">
                                 <a href="#">
-                                    <img src="images/banner/gd.jpeg" alt="Li's Static Banner">
+                                    <img src="images/banner/gd.png" alt="Li's Static Banner">
                                 </a>
                             </div>
                         </div>
@@ -780,6 +780,88 @@
             <!-- Quick View | Modal Area End Here -->
         </div>
         <script>
+            const cartDetailsFetch = async () => {
+            }
+            window.onload = async () => {
+                const res = await fetch('/cartDetails', {
+                    method: 'POST',
+                    body: JSON.stringify({ _id: "<%= user._id %>" }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const data = await res.json()
+                const cartCount = data.orders.length
+                document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
+
+                document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
+                    acc += `
+                        <li>
+                            <a href="/single-product" class="minicart-product-image">
+                                <img src="${product.image}" alt="cart products">
+                            </a>
+                            <div class="minicart-product-details">
+                                <h6><a href="/single-product">${product.name}</a></h6>
+                                <span>${product.price} x ${product.count}</span>
+                            </div>
+                            <button class="close" title="Remove" data-id="${product.id}">
+                                <i class="fa fa-close" data-id="${product.id}"></i>
+                            </button>
+                        </li>`
+                    return acc
+                }, '')
+
+                const remove = document.querySelectorAll('button.close[data-id]')
+                const update = async (e) => {
+                    const productID = e.target.getAttribute('data-id');
+                    try {
+                        const response = await fetch('/remove', {
+                            method: 'POST',
+                            body: JSON.stringify({ id: productID, _id: "<%= user._id %>" }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        const details = await response.json()
+                        console.log(details)
+                        const res = await fetch('/cartDetails', {
+                            method: 'POST',
+                            body: JSON.stringify({ _id: "<%= user._id %>" }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+
+                        const data = await res.json()
+                        const cartCount = data.orders.length
+                        document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
+
+                        document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
+                            acc += `<li>
+                                    <a href="/single-product" class="minicart-product-image">
+                                        <img src="${product.image}" alt="cart products">
+                                    </a>
+                                    <div class="minicart-product-details">
+                                        <h6><a href="/single-product">${product.name}</a></h6>
+                                        <span>${product.price} x ${product.count}</span>
+                                    </div>
+                                    <button class="close" title="Remove" data-id="${product.id}">
+                                        <i class="fa fa-close" data-id="${product.id}"></i>
+                                    </button>
+                                </li>`
+                            return acc
+                        }, '')
+                    } catch (e) {
+                        alert("Can't remove item from cart")
+                    }
+                }
+                remove.forEach(elmt => {
+                    elmt.addEventListener('click', async e => {
+                        update(e)
+                    })
+                })
+            }
             const addToCarts = document.querySelectorAll(".add-cart")
 
             addToCarts.forEach(addToCart => {

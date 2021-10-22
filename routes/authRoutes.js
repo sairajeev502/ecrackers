@@ -61,8 +61,15 @@ const cartDetails = async (req, res) => {
 
   try {
     const user = await User.findById(_id);
-    const orders = user.orders.map((e) => {
-      return products.filter((product) => product.id === e)[0];
+    const count = user.orders.reduce((acc, val) => {
+      acc[val] = acc[val] + 1 || 1;
+      return acc;
+    }, {});
+    const keys = Object.keys(count);
+    const orders = keys.map((e) => {
+      const det = products.filter((product) => product.id === e)[0];
+      det.count = count[e];
+      return det;
     });
 
     res.status(200).json({ orders });
@@ -76,7 +83,7 @@ const cartUpdate = async (req, res) => {
 
   try {
     const user = await User.findById(_id);
-    const orders = [...new Set([...user.orders, id].filter(Boolean))];
+    const orders = [...user.orders, id].filter(Boolean);
     await User.findOneAndUpdate({ _id }, { orders });
     res.status(200).json(orders);
   } catch (e) {
@@ -85,6 +92,19 @@ const cartUpdate = async (req, res) => {
   }
 };
 
+const cartItemDelete = async (req, res) => {
+  const { id, _id } = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    const orders = user.orders.filter((e) => id !== e);
+    await User.findOneAndUpdate({ _id }, { orders });
+    res.status(200).json({ log: "success" });
+  } catch (e) {
+    console.log({ e });
+    res.status(400).json({ e });
+  }
+};
 //shop items
 router.get("/single-product/:id", checkUser, (req, res) => {
   const url=req.url;
@@ -96,15 +116,15 @@ router.get("/single-product/:id", checkUser, (req, res) => {
       return
     }
   });
-  console.log(findProduct);
-  //res.set('Content-Type','text/css');// mime.lookup(url)
+  //console.log(findProduct);
   res.render("single-product", { product : findProduct })
 });
+
 
 router.post("/register", register_post);
 router.post("/login", login_post);
 router.post("/cartUpdate", cartUpdate);
 router.post("/cartDetails", cartDetails);
-router.post("/singleproduct",cartDetails);
+router.post("/remove", cartItemDelete);
 
 module.exports = router;

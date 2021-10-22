@@ -21,6 +21,7 @@ const checkUser = (req, res, next) => {
   } else {
     res.locals.user = null;
     next();
+    //res.redirect("/login-login");
   }
 };
 
@@ -29,6 +30,8 @@ const localProducts = (req, res, next) => {
   next();
 };
 
-const userCartItems = async (req, res, next) => {};
+const userCartItems = async (req, res, next) => {
+  next();
+};
 
 module.exports = { checkUser, localProducts, userCartItems };
