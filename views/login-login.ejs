@@ -207,7 +207,8 @@
                         if (data.err)
                             alert(JSON.stringify(data.err, null, 2))
                         else {
-                            alert("Successfully logged in")
+                            // alert("Successfully logged in")
+                            window.location.assign("/")
                         }
                     } catch (e) {
                         console.log(e)
