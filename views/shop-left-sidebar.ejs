@@ -470,11 +470,11 @@
                 document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
                     acc += `
 <li>
-    <a href="/single-product/`${product.id}`" class="minicart-product-image">
+    <a href="/single-product/${product.id}" class="minicart-product-image">
         <img src="${product.image}" alt="cart products">
     </a>
     <div class="minicart-product-details">
-        <h6><a href="/single-product/`${product.id}`">${product.name}</a></h6>
+        <h6><a href="/single-product/${product.id}">${product.name}</a></h6>
         <span>${product.price} x 1</span>
     </div>
     <button class="close" title="Remove">
