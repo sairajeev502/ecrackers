@@ -107,8 +107,7 @@ const cartItemDelete = async (req, res) => {
 };
 //shop items
 router.get("/single-product/:id", checkUser, (req, res) => {
-  const url=req.url;
-  console.log("Id is" + req.params.id );
+  //console.log("Id is" + req.params.id );
   var findProduct=products.filter((product)=> {
     if(product.id===req.params.id){
       return product
