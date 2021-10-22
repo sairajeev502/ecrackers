@@ -857,8 +857,9 @@
                     }
                 }
                 remove.forEach(elmt => {
-                    elmt.addEventListener('click', async e => {
-                        update(e)
+                    elmt.addEventListener('click', e => {
+                      e.preventDefault();
+                       update(e)
                     })
                 })
             }
