@@ -68,7 +68,7 @@ app.get("/shop-left-sidebar", checkUser, localProducts, (_, res) =>
 );
 app.get("/shop-list", (_, res) => res.render("shop-list"));
 app.get("/shopping-cart", (_, res) => res.render("shopping-cart"));
-app.get("/single-product", (_, res) => res.render("single-product"));
+
 app.get("/404", (_, res) => res.render("404"));
 app.get("/single-product-sale", (_, res) => res.render("single-product-sale"));
 app.get("/single-product-tab-style-top", (_, res) =>

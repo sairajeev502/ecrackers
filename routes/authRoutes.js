@@ -2,6 +2,7 @@ const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const { products } = require("../models/Product");
+const { checkUser } = require("../middlewares/authMiddleware");
 
 const router = Router();
 
@@ -84,10 +85,26 @@ const cartUpdate = async (req, res) => {
   }
 };
 
+//shop items
+router.get("/single-product/:id", checkUser, (req, res) => {
+  const url=req.url;
+  console.log("Id is" + req.params.id );
+  var findProduct=products.filter((product)=> {
+    if(product.id===req.params.id){
+      return product
+    }else{
+      return
+    }
+  });
+  console.log(findProduct);
+  //res.set('Content-Type','text/css');// mime.lookup(url)
+  res.render("single-product", { product : findProduct })
+});
 
 router.post("/register", register_post);
 router.post("/login", login_post);
 router.post("/cartUpdate", cartUpdate);
 router.post("/cartDetails", cartDetails);
+router.post("/singleproduct",cartDetails);
 
 module.exports = router;
