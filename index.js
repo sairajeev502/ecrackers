@@ -14,6 +14,9 @@ require("dotenv").config();
 
 const PORT = process.env.PORT || 3000;
 
+
+
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
@@ -31,7 +34,6 @@ mongoose
     })
   )
   .catch((err) => console.log(err));
-
 app.get("/", checkUser,localProducts, (_, res) => res.render("index"));
 app.get("/about-us", (_, res) => res.render("about-us"));
 app.get("/contact", checkUser, (_, res) => res.render("contact"));
