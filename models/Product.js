@@ -2,7 +2,7 @@ const products = [
   {
     id: "anil-magizhchi-pack-of-10",
     name: "Anil Magizhchi Pack Of 10",
-    price: "₹ 436",
+    price: "436",
     discount:"177",
     image: "/images/crackers/01.jpg",
     sno:"01",
@@ -13,7 +13,7 @@ const products = [
   {
     id: "Anil-Pinks-Gift-Pack-of-32",
     name: "Anil Pinks Gift Pack",
-    price: "₹ 2640",
+    price: "2640",
     discount:"1070",
     image: "/images/crackers/02.jpg",
     desc:"Pack Of 32",
@@ -24,7 +24,7 @@ const products = [
   {
     id: "anil-nano-gift-pack-pack-of-14",
     name: "Anil Nano Gift Pack Pack Of 14",
-    price: "₹ 648",
+    price: "648",
     discount:"262",
     image: "/images/crackers/03.jpg",
     desc:"Pack Of 14",
@@ -35,7 +35,7 @@ const products = [
   {
     id: "anil-hi-gift-pack-pack-of-19",
     name: "Anil Hi Gift Pack Pack Of 19",
-    price: "₹ 970",
+    price: "970",
     discount:"396",
     image: "/images/crackers/04.jpg",
     desc:"Pack Of 19",
@@ -45,7 +45,7 @@ const products = [
   {
     id: "anil-jumbo-pack-pack-of-35",
     name: "Anil Jumbo Pack Pack Of 35",
-    price: "₹ 5700",
+    price: "5700",
     discount:"1400",
     image: "/images/crackers/05.jpg",
     desc:"Pack Of 35",
@@ -55,7 +55,7 @@ const products = [
   {
     id: "anil-pyro-pack",
     name: "Anil Pyro Pack",
-    price: "₹ 6480",
+    price: "6480",
     discount:"2630",
     image: "/images/crackers/06.jpg",
     desc:"Pyro-pack",
@@ -65,7 +65,7 @@ const products = [
   {
     id: "anil-pyro-mega-pack-pack-of-41",
     name: "Anil Pyro Mega Pack Pack Of 41",
-    price: "₹ 6480",
+    price: "6480",
     discount:"2630",
     sno:"07",
     image: "/images/crackers/07.jpg",
@@ -75,7 +75,7 @@ const products = [
   {
     id: "anil-joy-gift-pack-pack-of-23",
     name: "Anil Joy Gift Pack Pack Of 23",
-    price: "₹ 1180",
+    price: "1180",
     discount:"480",
     sno:"08",
     image: "/images/crackers/08.jpg",
@@ -84,7 +84,7 @@ const products = [
   {
     id: "anil-family-pack-pack-of-28",
     name: "Anil Family Pack Pack Of 28",
-    price: "₹ 1700",
+    price: "1700",
     discount:"690",
     sno:"09",
     image: "/images/crackers/09.jpg",
@@ -94,7 +94,7 @@ const products = [
   {
     id: "anil-festival-gift-pack-pack-of-26",
     name: "Anil Festival Gift Pack Pack Of 26",
-    price: "₹ 1430",
+    price: "1430",
     discount:"580",
     sno:"10",
     image: "/images/crackers/10.jpg",
@@ -104,7 +104,7 @@ const products = [
   {
     id: "anil-nano-sound-less-pack-of-14",
     name: "Anil Nano Sound Less Pack Of 14",
-    price: "₹ 648",
+    price: "648",
     discount:"262",
     sno:"11",
     image: "/images/crackers/11.jpg",
@@ -114,7 +114,7 @@ const products = [
   {
     id: "anil-fun-pack-pack-of-40",
     name: "Anil Fun Pack Pack Of 40",
-    price: "₹ 3450",
+    price: "3450",
     sno:"12",
     discount:"1400",
     image: "/images/crackers/12.jpg",
