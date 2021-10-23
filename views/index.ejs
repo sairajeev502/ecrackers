@@ -662,6 +662,7 @@
                 }
                 remove.forEach(elmt => {
                     elmt.addEventListener('click', e => {
+                      e.preventDefault();
                        update(e)
                     })
                 })
