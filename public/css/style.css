@@ -5242,13 +5242,16 @@ span.required {
 .li-review-product img {
 	border: 1px solid #ebebeb;
 }
+.lowerText{
+	text-transform: lowercase;
+}
 .li-review-product-desc {
 	line-height: 18px;
 	color: #6f6f6f;
 }
 .li-product-name {
 	padding: 10px 0 5px;
-	font-size: 13px;
+	font-size: 18px;
 	color: #000;
 }
 .feedback-area .br-theme-fontawesome-stars .br-widget a {
