@@ -10,6 +10,15 @@ const handleErrors = (err) => {
 	let errors = { email: '', password: '' };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (err.message === 'Incorrect Email') {
+		errors.email = err.message;
+		return errors;
+	}
+
+>>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
 
 
 
@@ -17,12 +26,16 @@ const handleErrors = (err) => {
     errors.email = err.message;
     return errors;
   }
+<<<<<<< HEAD
 =======
 	if (err.message === 'Incorrect Email') {
 		errors.email = err.message;
 		return errors;
 	}
 >>>>>>> 93aedfa4a81df0d335f831196879f8ad843482f0
+=======
+
+>>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
 
 	if (err.message === 'Incorrect Password') {
 		errors.password = err.message;

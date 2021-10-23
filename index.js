@@ -13,15 +13,21 @@ const app = express();
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
 const PORT = process.env.PORT || 3000;
 
 
 
 
 app.use(express.static("public"));
+<<<<<<< HEAD
 =======
 app.use(express.static('public'));
 >>>>>>> 93aedfa4a81df0d335f831196879f8ad843482f0
+=======
+>>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
 app.use(express.json());
 app.use(cookieParser());
 app.set('view engine', 'ejs');
@@ -29,6 +35,9 @@ app.set('view engine', 'ejs');
 const dbURI = process.env.MONGODB_URI;
 mongoose
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
   .connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -44,6 +53,7 @@ app.get("/about-us", (_, res) => res.render("about-us"));
 app.get("/contact", checkUser, (_, res) => res.render("contact"));
 app.get("/faq", (_, res) => res.render("faq"));
 app.get("/index-3", (_, res) => res.render("index-3"));
+<<<<<<< HEAD
 =======
 	.connect(dbURI, {
 		useNewUrlParser: true,
@@ -58,6 +68,8 @@ app.get('/contact', checkUser, (_, res) => res.render('contact'));
 app.get('/faq', (_, res) => res.render('faq'));
 app.get('/index-3', (_, res) => res.render('index-3'));
 >>>>>>> 93aedfa4a81df0d335f831196879f8ad843482f0
+=======
+>>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
 
 app.get('/login-login', checkUser, (_, res) => res.render('login-login'));
 app.get('/login-register', (_, res) => res.render('login-register'));
