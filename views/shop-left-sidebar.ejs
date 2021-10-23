@@ -96,7 +96,7 @@
                                                                 <ul class="add-actions-link">
                                                                     <li class="add-cart active"><a data-uid="<%= user._id %>" class="add-to-cart-link" id="<%= product.id %>">Add to cart</a></li>
                                                                     <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                                                    <li><a class="links-details" href="/wishlist"><i class="fa fa-heart-o"></i></a></li>
+                                                                    <li><a class="links-details" href=#><i class="fa fa-heart-o"></i></a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -141,7 +141,7 @@
                                                                 <div class="price-box">
                                                                     <span class="new-price"><%= product.price %></span>
                                                                 </div>
-                                                                <p style=""><%= product.desc %></p>
+                                                                <p><%= product.desc %></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -359,7 +359,7 @@
                                                 </ul>
                                             </div>
                                             <div class="price-box pt-20">
-                                                <span class="new-price new-price-2">$57.98</span>
+                                                <span class="new-price new-price-2">57.98</span>
                                             </div>
                                             <div class="product-desc">
                                                 <p>
@@ -457,6 +457,10 @@
         <script>
 
 
+
+
+
+            //cartDetailscode
             window.onload = async () => {
                 const res = await fetch('/cartDetails', {
                     method: 'POST',
@@ -472,6 +476,10 @@
 
                 document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
                     acc += `
+
+
+
+
 <li>
     <a href="/single-product/${product.id}" class="minicart-product-image">
         <img src="${product.image}" alt="cart products">
@@ -508,10 +516,48 @@
                         console.log({ e })
                     }
                 })
+                //wishlidt part
+
+
+
+                const res = await fetch('/wishlistdetails', {
+                    method: 'POST',
+                    body: JSON.stringify({ _id: "<%= user._id %>" }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const data = await res.json()
+                const whishlistCount = data.wishlist.length
+                document.querySelectorAll('.wishlist-item-count')[0].textContent = wishlistCount ?? 0
+
+
+            const addToCardLinks = document.querySelectorAll(".add-to-cart-link")
+            addToCardLinks.forEach(addToCardLink => {
+                addToCardLink.addEventListener('click', async e => {
+                    e.preventDefault()
+                    try {
+                        const res = await fetch('/wishlistUpdate', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                id: e.target.id,
+                                uid: e.target.getAttribute("data-uid")
+                            }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        const data = await res.json()
+                        console.log(data)
+                    } catch (e) {
+                        console.log({ e })
+                    }
+                })
             })
+        })
         </script>
     </body>
 
-<!-- shop-left-sidebar31:48-->
-</html>
-<%-include('partials/footer')%>
+
+    <%-include('partials/footer')%>
