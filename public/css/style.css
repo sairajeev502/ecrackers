@@ -5503,3 +5503,20 @@ span.required {
 
 /*------------------------------------------> The End <-----------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
+
+.fa-long-arrow-right{
+	animation: arrowAnimation 1.5s ease 1s infinite normal forwards ;
+}
+@keyframes arrowAnimation {
+  0% {
+    animation-timing-function: ease-in-out;
+    opacity: 0.8;
+    transform: translateX(0px);
+  }
+	100% {
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+    transform: translateX(15px);
+  }
+
+}
