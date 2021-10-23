@@ -13,7 +13,7 @@ const handleErrors = (err) => {
     errors.email = err.message;
     return errors;
   }
-  
+
   if (err.message === "Incorrect Password") {
     errors.password = err.message;
     return errors;
@@ -56,6 +56,51 @@ const login_post = async (req, res) => {
   }
 };
 
+         // wishlistdetails
+
+const wishlistdetails = async (req, res) => {
+  const { _id } = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    const count = user.wishlist.reduce((acc, val) => {
+      acc[val] = acc[val] + 1 || 1;
+      return acc;
+    }, {});
+    const keys = Object.keys(count);
+    const wishlist = keys.map((e) => {
+      const det = products.filter((product) => product.id === e)[0];
+      det.count = count[e];
+      return det;
+    });
+
+    res.status(200).json({ wishlist });
+  } catch (e) {
+    res.status(400).json({ e });
+  }
+};
+
+
+       // wishlistupdate
+
+
+const wishlistUpdate = async (req, res) => {
+  const { id, uid: _id } = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    const wishlist = [...user.wishlist, id].filter(Boolean);
+    await User.findOneAndUpdate({ _id }, { wishlist });
+    res.status(200).json(wishlist);
+  } catch (e) {
+    console.log({ e });
+    res.status(400).json({ e });
+  }
+};
+
+              // cartDetails
+
+
 const cartDetails = async (req, res) => {
   const { _id } = req.body;
 
@@ -77,6 +122,8 @@ const cartDetails = async (req, res) => {
     res.status(400).json({ e });
   }
 };
+
+        // cartUpdate 
 
 const cartUpdate = async (req, res) => {
   const { id, uid: _id } = req.body;
