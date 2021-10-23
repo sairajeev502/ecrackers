@@ -4727,8 +4727,8 @@ span.required {
 	position: absolute;
 	left: 0;
 	top: 0;
-	height: calc(100% - 30px);
-	width: calc(100% - 30px);
+	height: calc(100% - -19px);
+	width: calc(100% - -24px);
 	z-index: -1;
 }
 /*------- end About Page Wrapper --------*/
