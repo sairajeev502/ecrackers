@@ -12,36 +12,18 @@ const app = express();
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
-<<<<<<< HEAD
-app.use(express.static('public'));
-=======
 const PORT = process.env.PORT || 3000;
 
 
 
 
 app.use(express.static("public"));
->>>>>>> bc0f939c0e83f2d4acea68def7534277260cc034
 app.use(express.json());
 app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 const dbURI = process.env.MONGODB_URI;
 mongoose
-<<<<<<< HEAD
-	.connect(dbURI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true
-	})
-	.then(() => console.log('DATABASE CONNECTED'))
-	.catch((err) => console.log(err));
-
-app.get('/', checkUser, localProducts, (_, res) => res.render('index'));
-app.get('/about-us', (_, res) => res.render('about-us'));
-app.get('/contact', checkUser, (_, res) => res.render('contact'));
-app.get('/faq', (_, res) => res.render('faq'));
-app.get('/index-3', (_, res) => res.render('index-3'));
-=======
   .connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -57,7 +39,6 @@ app.get("/about-us", (_, res) => res.render("about-us"));
 app.get("/contact", checkUser, (_, res) => res.render("contact"));
 app.get("/faq", (_, res) => res.render("faq"));
 app.get("/index-3", (_, res) => res.render("index-3"));
->>>>>>> bc0f939c0e83f2d4acea68def7534277260cc034
 
 app.get('/login-login', checkUser, (_, res) => res.render('login-login'));
 app.get('/login-register', (_, res) => res.render('login-register'));
