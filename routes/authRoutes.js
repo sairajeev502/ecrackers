@@ -9,26 +9,14 @@ const router = Router();
 const handleErrors = (err) => {
 	let errors = { email: '', password: '' };
 
-
 	if (err.message === 'Incorrect Email') {
 		errors.email = err.message;
 		return errors;
 	}
-
-
-
-
-  if (err.message === "Incorrect Email") {
-    errors.email = err.message;
-    return errors;
-  }
-
-
 	if (err.message === 'Incorrect Password') {
 		errors.password = err.message;
 		return errors;
 	}
-
 	return errors;
 };
 
