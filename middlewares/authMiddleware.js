@@ -5,6 +5,9 @@ const { products } = require("../models/Product");
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
 
+
+
+
   if (token) {
     jwt.verify(token, "ecrackers digitran", async (err, decodedToken) => {
       if (err) {
