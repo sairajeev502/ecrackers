@@ -32,7 +32,7 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get("/", checkUser, (_, res) => res.render("index"));
+app.get("/", checkUser,localProducts, (_, res) => res.render("index"));
 app.get("/about-us", (_, res) => res.render("about-us"));
 app.get("/contact", checkUser, (_, res) => res.render("contact"));
 app.get("/faq", (_, res) => res.render("faq"));

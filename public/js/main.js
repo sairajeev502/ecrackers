@@ -91,7 +91,7 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
 /* 06. Li's Product Activision
 /*----------------------------------------*/
 	$(".product-active").owlCarousel({
-		loop: true,
+		loop: false,
 		nav: true,
 		dots: false,
 		autoplay: false,
