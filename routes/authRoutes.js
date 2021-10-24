@@ -1,12 +1,13 @@
-const { Router } = require('express');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const { products } = require('../models/Product');
-const { checkUser } = require('../middlewares/authMiddleware');
+const { Router } = require("express");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+const { products } = require("../models/Product");
+const { checkUser } = require("../middlewares/authMiddleware");
 
 const router = Router();
 
 const handleErrors = (err) => {
+<<<<<<< HEAD
 	let errors = { email: '', password: '' };
 
 	if (err.message === 'Incorrect Email') {
@@ -18,41 +19,55 @@ const handleErrors = (err) => {
 		return errors;
 	}
 	return errors;
+=======
+  let errors = { email: "", password: "" };
+
+  if (err.message === "Incorrect Email") {
+    errors.email = err.message;
+    return errors;
+  }
+  if (err.message === "Incorrect Password") {
+    errors.password = err.message;
+    return errors;
+  }
+
+  return errors;
+>>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 };
 
 const maxAge = 3 * 24 * 60 * 60;
 
 const createToken = (id) =>
-	jwt.sign({ id }, 'ecrackers digitran', {
-		expiresIn: maxAge
-	});
+  jwt.sign({ id }, "ecrackers digitran", {
+    expiresIn: maxAge,
+  });
 
 const register_post = async (req, res) => {
-	try {
-		const user = await User.create(req.body);
-		res.status(201).json({ user });
-	} catch (err) {
-		res.status(400).json({ err });
-	}
+  try {
+    const user = await User.create(req.body);
+    res.status(201).json({ user });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
 };
 
 const login_post = async (req, res) => {
-	const { email, password } = req.body;
+  const { email, password } = req.body;
 
-	try {
-		const user = await User.login(email, password);
-		if (user) {
-			const token = createToken(user._id);
-			res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-			res.status(200).json({ user: user._id });
-			console.log({ user: user._id });
-		} else {
-			throw Error('Wrong credentials');
-		}
-	} catch (err) {
-		const errors = handleErrors(err);
-		res.status(400).json({ err: errors });
-	}
+  try {
+    const user = await User.login(email, password);
+    if (user) {
+      const token = createToken(user._id);
+      res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+      res.status(200).json({ user: user._id });
+      console.log({ user: user._id });
+    } else {
+      throw Error("Wrong credentials");
+    }
+  } catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ err: errors });
+  }
 };
 
 // wishlistdetails
@@ -81,6 +96,7 @@ const wishlistdetails = async (req, res) => {
 // wishlistupdate
 
 const wishlistUpdate = async (req, res) => {
+<<<<<<< HEAD
 	const { id, uid } = req.body;
 	try {
 		const user = await User.findById(uid);
@@ -91,6 +107,19 @@ const wishlistUpdate = async (req, res) => {
 		console.log({ e });
 		res.status(400).json({ e });
 	}
+=======
+  const { id, uid: _id } = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    const wishlist = [...user.wishlist, id].filter(Boolean);
+    await User.findOneAndUpdate({ _id }, { wishlist });
+    res.status(200).json(wishlist);
+  } catch (e) {
+    console.log({ e });
+    res.status(400).json({ e });
+  }
+>>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 };
 
 const wishlistpage = async (req, res) => {
@@ -119,33 +148,34 @@ const wishlistremove = async (req, res) => {
 // cartDetails
 
 const cartDetails = async (req, res) => {
-	const { _id } = req.body;
-	if (_id) {
-		try {
-			const user = await User.findById(_id);
-			const count = user.orders.reduce((acc, val) => {
-				acc[val] = acc[val] + 1 || 1;
-				return acc;
-			}, {});
-			const keys = Object.keys(count);
-			const orders = keys.map((e) => {
-				const det = products.filter((product) => product.id === e)[0];
-				det.count = count[e];
-				return det;
-			});
+  const { _id } = req.body;
+  if (_id) {
+    try {
+      const user = await User.findById(_id);
+      const count = user.orders.reduce((acc, val) => {
+        acc[val] = acc[val] + 1 || 1;
+        return acc;
+      }, {});
+      const keys = Object.keys(count);
+      const orders = keys.map((e) => {
+        const det = products.filter((product) => product.id === e)[0];
+        det.count = count[e];
+        return det;
+      });
 
-			res.status(200).json({ orders });
-		} catch (e) {
-			res.status(400).json({ e });
-		}
-	} else {
-		return null;
-	}
+      res.status(200).json({ orders });
+    } catch (e) {
+      res.status(400).json({ e });
+    }
+  } else {
+    return null;
+  }
 };
 
 // cartUpdate
 
 const cartUpdate = async (req, res) => {
+<<<<<<< HEAD
 	const { id, uid: _id } = req.body;
 	try {
 		const user = await User.findById(_id);
@@ -156,42 +186,51 @@ const cartUpdate = async (req, res) => {
 		console.log({ e });
 		res.status(400).json({ e });
 	}
+=======
+  const { id, uid: _id } = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    const orders = [...user.orders, id].filter(Boolean);
+    await User.findOneAndUpdate({ _id }, { orders });
+    res.status(200).json(orders);
+  } catch (e) {
+    console.log({ e });
+    res.status(400).json({ e });
+  }
+>>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 };
 
 const cartItemDelete = async (req, res) => {
-	const { id, _id } = req.body;
-	if (_id) {
-		try {
-			const user = await User.findById(_id);
-			const orders = user.orders.filter((e) => id !== e);
-			await User.findOneAndUpdate({ _id }, { orders });
-			res.status(200).json({ log: 'success' });
-		} catch (e) {
-			console.log({ e });
-			res.status(400).json({ e });
-		}
-	} else {
-		res.send(null);
-	}
+  const { id, _id } = req.body;
+  if (_id) {
+    try {
+      const user = await User.findById(_id);
+      const orders = user.orders.filter((e) => id !== e);
+      await User.findOneAndUpdate({ _id }, { orders });
+      res.status(200).json({ log: "success" });
+    } catch (e) {
+      console.log({ e });
+      res.status(400).json({ e });
+    }
+  } else {
+    res.send(null);
+  }
 };
+
 //shop items
-router.get('/single-product/:id', checkUser, (req, res) => {
-	//console.log("Id is" + req.params.id );
-	var findProduct = products.filter((product) => {
-		if (product.id === req.params.id) {
-			return product;
-		} else {
-			return;
-		}
-	});
-	//console.log(findProduct);
-	res.render('single-product', { product: findProduct });
+router.get("/single-product/:id", checkUser, (req, res) => {
+  const findProduct = products.filter(
+    (product) => product.id === req.params.id
+  );
+  res.render("single-product", { product: findProduct });
 });
 const signout = async (req, res) => {
 	res.clearCookie('jwt');
 	res.redirect('/');
 };
 
+<<<<<<< HEAD
 router.post('/register', register_post);
 router.post('/login', login_post);
 router.post('/cartUpdate', checkUser, cartUpdate);
@@ -202,5 +241,12 @@ router.post('/wishlistdetails', checkUser, wishlistdetails);
 router.post('/wishlistpage', checkUser, wishlistpage);
 router.post('/wishlistremove', wishlistremove);
 router.post('/signout', signout);
+=======
+router.post("/register", register_post);
+router.post("/login", login_post);
+router.post("/cartUpdate", cartUpdate);
+router.post("/cartDetails", cartDetails);
+router.post("/remove", cartItemDelete);
+>>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 
 module.exports = router;
