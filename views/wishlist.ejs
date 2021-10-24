@@ -30,31 +30,9 @@
                                                 <th class="li-product-add-cart">add to cart</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                <td class="li-product-thumbnail"><a href="#"><img src="images/wishlist-thumb/1.jpg" alt=""></a></td>
-                                                <td class="li-product-name"><a href="#">Dummy Item (1)</a></td>
-                                                <td class="li-product-price"><span class="amount">$23.39</span></td>
-                                                <td class="li-product-stock-status"><span class="in-stock">in stock</span></td>
-                                                <td class="li-product-add-cart"><a href="#">add to cart</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                <td class="li-product-thumbnail"><a href="#"><img src="images/wishlist-thumb/2.jpg" alt=""></a></td>
-                                                <td class="li-product-name"><a href="#">Dummy Item (2)</a></td>
-                                                <td class="li-product-price"><span class="amount">$30.50</span></td>
-                                                <td class="li-product-stock-status"><span class="in-stock">in stock</span></td>
-                                                <td class="li-product-add-cart"><a href="#">add to cart</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                <td class="li-product-thumbnail"><a href="#"><img src="images/wishlist-thumb/3.jpg" alt=""></a></td>
-                                                <td class="li-product-name"><a href="#">Dummy Item (3)s</a></td>
-                                                <td class="li-product-price"><span class="amount">$40.19</span></td>
-                                                <td class="li-product-stock-status"><span class="out-stock">out stock</span></td>
-                                                <td class="li-product-add-cart"><a href="#">add to cart</a></td>
-                                            </tr>
+                                        <tbody class="tbody" data-user="<%= user._id %> ">
+                                             
+                                                
                                         </tbody>
                                     </table>
                                 </div>
@@ -305,6 +283,145 @@
         <script src="js/scrollUp.min.js"></script>
         <!-- Main/Activator js -->
         <script src="js/main.js"></script>
+        <script>
+                window.addEventListener('load',async()=>{
+                    const res = await fetch('/wishlistpage', {
+                            method: 'POST',
+                            body: JSON.stringify({ _id: "<%= user._id %>" }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        const data=await res.json()
+                        document.querySelector(".tbody").innerHTML = data.reduce((acc, product) => {
+                                acc += `<tr>
+                                                        <td class="li-product-remove" title="remove" data-id="${product.id}><a href="#"><i class="fa fa-times"></i></a></td>
+                                                        <td class="li-product-thumbnail"><a href="#"><img src=${product.image} alt=""></a></td>
+                                                        <td class="li-product-name"><a href="#">${product.name}</a></td>
+                                                        <td class="li-product-price"><span class="amount">$${product.price}</span></td>
+                                                        <td class="li-product-stock-status"><span class="in-stock">in stock</span></td>
+                                                        <td class="li-product-add-cart"><a href="#" id=${product.id} class='add-to-cart-link'>add to cart</a></td>
+                                                    </tr>`
+                                return acc
+                            }, '')
+                        })
+                        const addTo = document.querySelectorAll(".add-to-cart-link")
+                        console.log(addTo);
+            addTo.forEach(async addToCardLink => {
+                addToCardLink.addEventListener('click', async e => {
+                    e.preventDefault()
+                    console.log(e);
+            const res = await fetch('/cartUpdate', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                id: e.target.id,
+                                uid:document.querySelector('.tbody').getAttribute("data-uid")
+                            }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                    })
+                })
+                const wishdetails=async()=>{
+                const res = await fetch('/wishlistdetails', {
+                    method: 'POST',
+                    body: JSON.stringify({ _id: "<%=user===null?null: user._id %>" }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const data = await res.json()
+                const wishlistCount = data.wishlist.length
+                document.querySelectorAll('.wishlist-item-count')[0].textContent = wishlistCount ?? 0
+            }
+            window.addEventListener('load',async()=>{
+                const res = await fetch('/cartDetails', {
+                    method: 'POST',
+                    body: JSON.stringify({ _id: "<%=user===null? null : user._id %>" }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const data = await res.json()
+                const cartCount = data.orders.length
+                document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
+                document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
+                    acc += `
+                        <li>
+                            <a href="/single-product" class="minicart-product-image">
+                                <img src="${product.image}" alt="cart products">
+                            </a>
+                            <div class="minicart-product-details">
+                                <h6><a href="/single-product">${product.name}</a></h6>
+                                <span>${product.price} x ${product.count}</span>
+                            </div>
+                            <button class="close" title="Remove" data-id="${product.id}">
+                                <i class="fa fa-close" data-id="${product.id}"></i>
+                            </button>
+                        </li>`
+                    return acc
+                }, '')
+
+                const remove = document.querySelectorAll('button.close[data-id]')
+                const update = async (e) => {
+                    const productID = e.target.getAttribute('data-id');
+                    try {
+                        const response = await fetch('/remove', {
+                            method: 'POST',
+                            body: JSON.stringify({ id: productID, _id: "<%=user===null?null: user._id %>" }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        const details = await response.json()
+                        const res = await fetch('/cartDetails', {
+                            method: 'POST',
+                            body: JSON.stringify({ _id: "<%= user===null ?null: user._id %>" }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+
+                        const data = await res.json()
+                        const cartCount = data.orders.length
+                        document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
+
+                        document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
+                            acc += `<li>
+                                    <a href="/single-product" class="minicart-product-image">
+                                        <img src="${product.image}" alt="cart products">
+                                    </a>
+                                    <div class="minicart-product-details">
+                                        <h6><a href="/single-product">${product.name}</a></h6>
+                                        <span>${product.price} x ${product.count}</span>
+                                    </div>
+                                    <button class="close" data-id="${product.id}">
+                                        <i class="fa fa-close" data-id="${product.id}"></i>
+                                    </button>
+                                </li>`
+                            return acc
+                        }, '')
+                        window.location.reload()
+                    } catch (e) {
+                        alert("Can't remove item from cart")
+                    }
+                remove.forEach(elmt => {
+                    elmt.addEventListener('click', e => {
+                      e.preventDefault();
+                       update(e)
+                    })
+                })
+            }
+                wishdetails()
+            })
+                document.querySelector('.signout').addEventListener('click',async ()=>{
+                const res = await fetch('/signout', {method: 'POST',body:{}})
+                window.location.reload()
+            })
+        </script>
     </body>
 
 <!-- wishlist31:30-->

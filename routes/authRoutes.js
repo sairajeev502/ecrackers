@@ -59,7 +59,6 @@ const login_post = async (req, res) => {
 
 const wishlistdetails = async (req, res) => {
 	const { _id } = req.body;
-
 	try {
 		const user = await User.findById(_id);
 		const count = user.wishlist.reduce((acc, val) => {
@@ -82,17 +81,39 @@ const wishlistdetails = async (req, res) => {
 // wishlistupdate
 
 const wishlistUpdate = async (req, res) => {
-	const { id, uid: _id } = req.body;
-
+	const { id, uid } = req.body;
 	try {
-		const user = await User.findById(_id);
+		const user = await User.findById(uid);
 		const wishlist = [...user.wishlist, id].filter(Boolean);
-		await User.findOneAndUpdate({ _id }, { wishlist });
+		await User.findOneAndUpdate({ _id: uid }, { wishlist });
 		res.status(200).json(wishlist);
 	} catch (e) {
 		console.log({ e });
 		res.status(400).json({ e });
 	}
+};
+
+const wishlistpage = async (req, res) => {
+	const { _id } = req.body;
+	console.log(_id);
+	const user = await User.findById(_id);
+	var arr = [];
+	user.wishlist.forEach((w) => {
+		products.forEach((product) => {
+			if (product.id === w) {
+				arr.push(product);
+			}
+		});
+	});
+	res.json(arr);
+};
+
+const wishlistremove = async (req, res) => {
+	const { _id, id } = req.body;
+	console.log(_id, id);
+	const user = await User.findById(_id);
+	const filtered = user.wishlist.filter((w) => w._id !== id);
+	res.json(filtered);
 };
 
 // cartDetails
@@ -126,7 +147,6 @@ const cartDetails = async (req, res) => {
 
 const cartUpdate = async (req, res) => {
 	const { id, uid: _id } = req.body;
-
 	try {
 		const user = await User.findById(_id);
 		const orders = [...user.orders, id].filter(Boolean);
@@ -167,11 +187,20 @@ router.get('/single-product/:id', checkUser, (req, res) => {
 	//console.log(findProduct);
 	res.render('single-product', { product: findProduct });
 });
+const signout = async (req, res) => {
+	res.clearCookie('jwt');
+	res.redirect('/');
+};
 
 router.post('/register', register_post);
 router.post('/login', login_post);
-router.post('/cartUpdate', cartUpdate);
+router.post('/cartUpdate', checkUser, cartUpdate);
 router.post('/cartDetails', cartDetails);
 router.post('/remove', cartItemDelete);
+router.post('/wishlistUpdate', checkUser, wishlistUpdate);
+router.post('/wishlistdetails', checkUser, wishlistdetails);
+router.post('/wishlistpage', checkUser, wishlistpage);
+router.post('/wishlistremove', wishlistremove);
+router.post('/signout', signout);
 
 module.exports = router;

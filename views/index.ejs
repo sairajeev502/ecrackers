@@ -53,6 +53,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="li-product-tab">
+<span class="msg" data-msg="<%= user===null?'Login to Continue!':'' %>"></span>
+
                                 <ul class="nav li-product-menu">
                                    <li><a class="active" data-toggle="tab" href="#li-new-product"><span>New Arrival</span></a></li>
                                    <!-- <li><a data-toggle="tab" href="#li-bestseller-product"><span>Bestseller</span></a></li> -->
@@ -102,8 +104,8 @@
                                                  </div>
                                                  <div class="add-actions">
                                                      <ul class="add-actions-link">
-                                                         <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                                         <li><a class="links-details" href="/wishlist"><i class="fa fa-heart-o"></i></a></li>
+                                                         <li class="add-cart active"><a href="#" data-uid="<%=user===null?null: user._id %>" class="add-to-cart-link" id="<%= products[i].id %>">Add to cart</a></li>
+                                                         <li><a class="links-details add-to-wishlist-link" href="#" data-uid="<%=user===null?null: user._id.toLocaleString()%>" class="" id="<%= products[i].id %>"><i class="fa fa-heart-o"></i></a></li>
                                                          <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                      </ul>
                                                  </div>
@@ -442,12 +444,6 @@
                             <!-- <div class="li-static-home-image"></div> -->
                             <!-- Li's Static Home Image Area End Here -->
                             <!-- Begin Li's Static Home Content Area -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
                             <!-- <div class="li-static-home-content">
                                 <p>Sale Offer<span>-20% Off</span>This Week</p>
                                 <h2>Featured Product</h2>
@@ -460,13 +456,6 @@
                                     <a href="/shop-left-sidebar" class="links">Shopping Now</a>
                                 </div>
                             </div> -->
-<<<<<<< HEAD
->>>>>>> 93aedfa4a81df0d335f831196879f8ad843482f0
-=======
-=======
-                          
->>>>>>> bc0f939c0e83f2d4acea68def7534277260cc034
->>>>>>> 5721cfc9bea4198bd1f40948a5221f73786c8dc1
                             <!-- Li's Static Home Content Area End Here -->
                         </div>
                     </div>
@@ -609,7 +598,6 @@
                 const data = await res.json()
                 const cartCount = data.orders.length
                 document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
-
                 document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
                     acc += `
                         <li>
@@ -660,12 +648,13 @@
                                         <h6><a href="/single-product">${product.name}</a></h6>
                                         <span>${product.price} x ${product.count}</span>
                                     </div>
-                                    <button class="close" title="Remove" data-id="${product.id}">
+                                    <button class="close" data-id="${product.id}">
                                         <i class="fa fa-close" data-id="${product.id}"></i>
                                     </button>
                                 </li>`
                             return acc
                         }, '')
+                        window.location.reload()
                     } catch (e) {
                         alert("Can't remove item from cart")
                     }
@@ -677,12 +666,53 @@
                     })
                 })
             }
-            const addToCarts = document.querySelectorAll(".add-cart")
-
-            addToCarts.forEach(addToCart => {
-                addToCart.addEventListener('click', e => {
-                    console.log(e)
+            const wishdetails=async()=>{
+                const res = await fetch('/wishlistdetails', {
+                    method: 'POST',
+                    body: JSON.stringify({ _id: "<%=user===null?null: user._id %>" }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
+
+                const data = await res.json()
+                const wishlistCount = data.wishlist.length
+                document.querySelectorAll('.wishlist-item-count')[0].textContent = wishlistCount ?? 0
+            }
+            const addToWishlistLink = document.querySelectorAll(".add-to-wishlist-link")
+            addToWishlistLink.forEach(addToWishlist => {
+                addToWishlist.addEventListener('click', async e => {
+                    e.preventDefault()
+                    if (document.querySelector('.msg').getAttribute('data-msg').length > 0) {
+			alert(document.querySelector('.msg').getAttribute('data-msg'));
+			return;
+		}
+                    try {
+                        const res = await fetch('/wishlistUpdate', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                id: e.target.id,
+                                uid: e.target.getAttribute("data-uid")
+                            }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        const data = await res.json()
+                        wishdetails()
+                        
+                    } catch (e) {
+                        console.log({ e })
+                    }
+                })
+            })
+            window.addEventListener('load',()=>{
+                wishdetails()
+            })
+             
+            document.querySelector('.signout').addEventListener('click',async ()=>{
+                const res = await fetch('/signout', {method: 'POST',body:{}})
+                window.location.reload()
             })
         </script>
 <%-include('partials/footer')%>

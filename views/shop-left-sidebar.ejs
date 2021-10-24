@@ -456,10 +456,6 @@
         <script src="js/main.js"></script>
         <script>
 
-
-
-
-
             //cartDetailscode
             window.onload = async () => {
                 const res = await fetch('/cartDetails', {
@@ -476,10 +472,6 @@
 
                 document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
                     acc += `
-
-
-
-
 <li>
     <a href="/single-product/${product.id}" class="minicart-product-image">
         <img src="${product.image}" alt="cart products">
@@ -527,6 +519,7 @@
                 })
 
                 const data = await res.json()
+                console.log(data);
                 const whishlistCount = data.wishlist.length
                 document.querySelectorAll('.wishlist-item-count')[0].textContent = wishlistCount ?? 0
 

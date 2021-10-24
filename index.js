@@ -31,7 +31,7 @@ app.get('/contact', checkUser, (_, res) => res.render('contact'));
 app.get('/faq', (_, res) => res.render('faq'));
 app.get('/index-3', (_, res) => res.render('index-3'));
 
-app.get('/login-login', checkUser, (_, res) => res.render('login-login'));
+app.get('/login-login', (_, res) => res.render('login-login'));
 app.get('/login-register', (_, res) => res.render('login-register'));
 app.get('/vendor-login', (_, res) => res.render('vendor-login'));
 app.get('/vendor-register', (_, res) => res.render('vendor-register'));
@@ -55,7 +55,7 @@ app.get('/blog-video-format', (_, res) => res.render('blog-video-format'));
 
 app.get('/checkout', (_, res) => res.render('checkout'));
 app.get('/compare', (_, res) => res.render('compare'));
-app.get('/wishlist', (_, res) => res.render('wishlist'));
+app.get('/wishlist', checkUser, (_, res) => res.render('wishlist'));
 app.get('/shop-left-sidebar', checkUser, localProducts, (_, res) =>
 	res.render('shop-left-sidebar')
 );
