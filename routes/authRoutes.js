@@ -7,7 +7,6 @@ const { checkUser } = require("../middlewares/authMiddleware");
 const router = Router();
 
 const handleErrors = (err) => {
-<<<<<<< HEAD
 	let errors = { email: '', password: '' };
 
 	if (err.message === 'Incorrect Email') {
@@ -19,20 +18,6 @@ const handleErrors = (err) => {
 		return errors;
 	}
 	return errors;
-=======
-  let errors = { email: "", password: "" };
-
-  if (err.message === "Incorrect Email") {
-    errors.email = err.message;
-    return errors;
-  }
-  if (err.message === "Incorrect Password") {
-    errors.password = err.message;
-    return errors;
-  }
-
-  return errors;
->>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 };
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -96,7 +81,6 @@ const wishlistdetails = async (req, res) => {
 // wishlistupdate
 
 const wishlistUpdate = async (req, res) => {
-<<<<<<< HEAD
 	const { id, uid } = req.body;
 	try {
 		const user = await User.findById(uid);
@@ -107,19 +91,6 @@ const wishlistUpdate = async (req, res) => {
 		console.log({ e });
 		res.status(400).json({ e });
 	}
-=======
-  const { id, uid: _id } = req.body;
-
-  try {
-    const user = await User.findById(_id);
-    const wishlist = [...user.wishlist, id].filter(Boolean);
-    await User.findOneAndUpdate({ _id }, { wishlist });
-    res.status(200).json(wishlist);
-  } catch (e) {
-    console.log({ e });
-    res.status(400).json({ e });
-  }
->>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 };
 
 const wishlistpage = async (req, res) => {
@@ -175,7 +146,6 @@ const cartDetails = async (req, res) => {
 // cartUpdate
 
 const cartUpdate = async (req, res) => {
-<<<<<<< HEAD
 	const { id, uid: _id } = req.body;
 	try {
 		const user = await User.findById(_id);
@@ -186,19 +156,6 @@ const cartUpdate = async (req, res) => {
 		console.log({ e });
 		res.status(400).json({ e });
 	}
-=======
-  const { id, uid: _id } = req.body;
-
-  try {
-    const user = await User.findById(_id);
-    const orders = [...user.orders, id].filter(Boolean);
-    await User.findOneAndUpdate({ _id }, { orders });
-    res.status(200).json(orders);
-  } catch (e) {
-    console.log({ e });
-    res.status(400).json({ e });
-  }
->>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 };
 
 const cartItemDelete = async (req, res) => {
@@ -230,7 +187,6 @@ const signout = async (req, res) => {
 	res.redirect('/');
 };
 
-<<<<<<< HEAD
 router.post('/register', register_post);
 router.post('/login', login_post);
 router.post('/cartUpdate', checkUser, cartUpdate);
@@ -241,12 +197,5 @@ router.post('/wishlistdetails', checkUser, wishlistdetails);
 router.post('/wishlistpage', checkUser, wishlistpage);
 router.post('/wishlistremove', wishlistremove);
 router.post('/signout', signout);
-=======
-router.post("/register", register_post);
-router.post("/login", login_post);
-router.post("/cartUpdate", cartUpdate);
-router.post("/cartDetails", cartDetails);
-router.post("/remove", cartItemDelete);
->>>>>>> f1522708fcbfb0bbe89870d0d2802574a253e83a
 
 module.exports = router;
