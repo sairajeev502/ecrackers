@@ -467,10 +467,10 @@
                 })
 
                 const data = await res.json()
-                const cartCount = data.orders.length
+                const cartCount = data.cart.length
                 document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
 
-                document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
+                document.querySelector(".minicart-product-list").innerHTML = data.cart.reduce((acc, product) => {
                     acc += `
 <li>
     <a href="/single-product/${product.id}" class="minicart-product-image">

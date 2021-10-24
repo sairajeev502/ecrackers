@@ -1,8 +1,8 @@
-const { Router } = require("express");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const { products } = require("../models/Product");
-const { checkUser } = require("../middlewares/authMiddleware");
+const { Router } = require('express');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const { products } = require('../models/Product');
+const { checkUser } = require('../middlewares/authMiddleware');
 
 const router = Router();
 
@@ -23,36 +23,36 @@ const handleErrors = (err) => {
 const maxAge = 3 * 24 * 60 * 60;
 
 const createToken = (id) =>
-  jwt.sign({ id }, "ecrackers digitran", {
-    expiresIn: maxAge,
-  });
+	jwt.sign({ id }, 'ecrackers digitran', {
+		expiresIn: maxAge
+	});
 
 const register_post = async (req, res) => {
-  try {
-    const user = await User.create(req.body);
-    res.status(201).json({ user });
-  } catch (err) {
-    res.status(400).json({ err });
-  }
+	try {
+		const user = await User.create(req.body);
+		res.status(201).json({ user });
+	} catch (err) {
+		res.status(400).json({ err });
+	}
 };
 
 const login_post = async (req, res) => {
-  const { email, password } = req.body;
+	const { email, password } = req.body;
 
-  try {
-    const user = await User.login(email, password);
-    if (user) {
-      const token = createToken(user._id);
-      res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-      res.status(200).json({ user: user._id });
-      console.log({ user: user._id });
-    } else {
-      throw Error("Wrong credentials");
-    }
-  } catch (err) {
-    const errors = handleErrors(err);
-    res.status(400).json({ err: errors });
-  }
+	try {
+		const user = await User.login(email, password);
+		if (user) {
+			const token = createToken(user._id);
+			res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+			res.status(200).json({ user: user._id });
+			console.log({ user: user._id });
+		} else {
+			throw Error('Wrong credentials');
+		}
+	} catch (err) {
+		const errors = handleErrors(err);
+		res.status(400).json({ err: errors });
+	}
 };
 
 // wishlistdetails
@@ -110,48 +110,58 @@ const wishlistpage = async (req, res) => {
 
 const wishlistremove = async (req, res) => {
 	const { _id, id } = req.body;
-	console.log(_id, id);
-	const user = await User.findById(_id);
-	const filtered = user.wishlist.filter((w) => w._id !== id);
-	res.json(filtered);
+	if (_id) {
+		try {
+			const user = await User.findById(_id);
+			const wishlist = user.wishlist.filter((e) => id !== e);
+			await User.findOneAndUpdate({ _id }, { wishlist });
+			res.status(200).json({ log: 'success' });
+		} catch (e) {
+			console.log({ e });
+			res.status(400).json({ e });
+		}
+	} else {
+		res.send(null);
+	}
 };
 
 // cartDetails
 
 const cartDetails = async (req, res) => {
-  const { _id } = req.body;
-  if (_id) {
-    try {
-      const user = await User.findById(_id);
-      const count = user.orders.reduce((acc, val) => {
-        acc[val] = acc[val] + 1 || 1;
-        return acc;
-      }, {});
-      const keys = Object.keys(count);
-      const orders = keys.map((e) => {
-        const det = products.filter((product) => product.id === e)[0];
-        det.count = count[e];
-        return det;
-      });
+	const { _id } = req.body;
+	if (_id) {
+		try {
+			const user = await User.findById(_id);
+			const count = user.cart.reduce((acc, val) => {
+				acc[val] = acc[val] + 1 || 1;
+				return acc;
+			}, {});
+			const keys = Object.keys(count);
+			const cart = keys.map((e) => {
+				const det = products.filter((product) => product.id === e)[0];
+				det.count = count[e];
+				return det;
+			});
 
-      res.status(200).json({ orders });
-    } catch (e) {
-      res.status(400).json({ e });
-    }
-  } else {
-    return null;
-  }
+			res.status(200).json({ cart });
+		} catch (e) {
+			res.status(400).json({ e });
+		}
+	} else {
+		return null;
+	}
 };
 
 // cartUpdate
 
 const cartUpdate = async (req, res) => {
 	const { id, uid: _id } = req.body;
+	console.log(req.body);
 	try {
 		const user = await User.findById(_id);
-		const orders = [...user.orders, id].filter(Boolean);
-		await User.findOneAndUpdate({ _id }, { orders });
-		res.status(200).json(orders);
+		const cart = [...user.cart, id].filter(Boolean);
+		await User.findOneAndUpdate({ _id }, { cart });
+		res.status(200).json(cart);
 	} catch (e) {
 		console.log({ e });
 		res.status(400).json({ e });
@@ -159,28 +169,28 @@ const cartUpdate = async (req, res) => {
 };
 
 const cartItemDelete = async (req, res) => {
-  const { id, _id } = req.body;
-  if (_id) {
-    try {
-      const user = await User.findById(_id);
-      const orders = user.orders.filter((e) => id !== e);
-      await User.findOneAndUpdate({ _id }, { orders });
-      res.status(200).json({ log: "success" });
-    } catch (e) {
-      console.log({ e });
-      res.status(400).json({ e });
-    }
-  } else {
-    res.send(null);
-  }
+	const { id, _id } = req.body;
+	if (_id) {
+		try {
+			const user = await User.findById(_id);
+			const cart = user.cart.filter((e) => id !== e);
+			await User.findOneAndUpdate({ _id }, { cart });
+			res.status(200).json({ log: 'success' });
+		} catch (e) {
+			console.log({ e });
+			res.status(400).json({ e });
+		}
+	} else {
+		res.send(null);
+	}
 };
 
 //shop items
-router.get("/single-product/:id", checkUser, (req, res) => {
-  const findProduct = products.filter(
-    (product) => product.id === req.params.id
-  );
-  res.render("single-product", { product: findProduct });
+router.get('/single-product/:id', checkUser, (req, res) => {
+	const findProduct = products.filter(
+		(product) => product.id === req.params.id
+	);
+	res.render('single-product', { product: findProduct });
 });
 const signout = async (req, res) => {
 	res.clearCookie('jwt');

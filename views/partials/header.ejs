@@ -158,8 +158,9 @@
                                       </li>
                                       <!-- Settings End -->
                                         <!-- Begin Header Middle Wishlist Area -->
+                                        <% if(user!==undefined){ %> 
                                         <li class="hm-wishlist">
-                                            <a href="/wishlist">
+                                            <a href='/wishlist'>
                                                 <span class="cart-item-count wishlist-item-count">0</span>
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
@@ -169,15 +170,15 @@
                                         <li class="hm-minicart">
                                             <div class="hm-minicart-trigger">
                                                 <span class="item-icon"></span>
-                                                  <!-- <span class="item-text">₹80.00 -->
-                                                  <span class="cart-item-count">0</span>
+                                                <!-- <span class="item-text">₹80.00 -->
+                                                    <span class="cart-item-count">0</span>
                                                 </span>
                                             </div>
                                             <span></span>
                                             <div class="minicart">
                                                 <ul class="minicart-product-list">
                                                 </ul>
-
+                                                
                                                 <div class="minicart-button">
                                                     <a href="/shopping-cart" class="li-button li-button-fullwidth li-button-dark">
                                                         <span>View Full Cart</span>
@@ -188,6 +189,7 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <% } %> 
                                         <!-- Header Mini Cart Area End Here -->
                                     </ul>
                                 </div>
@@ -199,7 +201,6 @@
                 </div>
                 <!-- Header Middle Area End Here -->
                 <!-- Begin Header Bottom Area -->
-
                 <div class="header-bottom header-sticky d-none d-lg-block d-xl-block">
                     <div class="container">
                         <div class="row">
@@ -222,16 +223,13 @@
                                                     </li>
                                                     <li><a href="/single-product-tab-style-top">Single Product Style</a>
                                                         <ul>
-
                                                             <li><a href="/single-product-tab-style-top">Single Product Tab Style Top</a></li>
-
                                                         </ul>
                                                     </li>
                                                     <li><a href="/single-product">Single Products</a>
                                                         <ul>
                                                             <li><a href="/single-product">Single Product</a></li>
                                                             <li><a href="/single-product-sale">Single Product Sale</a></li>
-
                                                         </ul>
                                                     </li>
                                                 </ul> -->

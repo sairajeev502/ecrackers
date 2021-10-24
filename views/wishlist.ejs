@@ -30,9 +30,7 @@
                                                 <th class="li-product-add-cart">add to cart</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="tbody" data-user="<%= user._id %> ">
-                                             
-                                                
+                                        <tbody class="tbody" data-uid="<%= user._id %>">
                                         </tbody>
                                     </table>
                                 </div>
@@ -293,38 +291,73 @@
                             }
                         })
                         const data=await res.json()
-                        document.querySelector(".tbody").innerHTML = data.reduce((acc, product) => {
-                                acc += `<tr>
-                                                        <td class="li-product-remove" title="remove" data-id="${product.id}><a href="#"><i class="fa fa-times"></i></a></td>
-                                                        <td class="li-product-thumbnail"><a href="#"><img src=${product.image} alt=""></a></td>
-                                                        <td class="li-product-name"><a href="#">${product.name}</a></td>
-                                                        <td class="li-product-price"><span class="amount">$${product.price}</span></td>
-                                                        <td class="li-product-stock-status"><span class="in-stock">in stock</span></td>
-                                                        <td class="li-product-add-cart"><a href="#" id=${product.id} class='add-to-cart-link'>add to cart</a></td>
-                                                    </tr>`
-                                return acc
-                            }, '')
-                        })
-                        const addTo = document.querySelectorAll(".add-to-cart-link")
-                        console.log(addTo);
-            addTo.forEach(async addToCardLink => {
-                addToCardLink.addEventListener('click', async e => {
-                    e.preventDefault()
-                    console.log(e);
-            const res = await fetch('/cartUpdate', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                id: e.target.id,
-                                uid:document.querySelector('.tbody').getAttribute("data-uid")
-                            }),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        })
-                    })
-                })
+                        data.forEach(d => {
+                            const tr=document.createElement('tr')
+                            const td1=document.createElement('td')
+                            const td2=document.createElement('td')
+                            const td3=document.createElement('td')
+                            const td4=document.createElement('td')
+                            const td5=document.createElement('td')
+                            const td6=document.createElement('td')
+                            const a1=document.createElement('a')
+                            const a2=document.createElement('a')
+                            const a3=document.createElement('a')
+                            const a4=document.createElement('a')
+                            const a5=document.createElement('a')
+                            const a6=document.createElement('a')
+                            const i1 = document.createElement('i')
+                            const img2=document.createElement('img')
+                            const span4=document.createElement('span')
+                            const span5=document.createElement('span')
+                            const span6=document.createElement('span')
+                            td1.setAttribute('class','li-product-remove')
+                            td1.setAttribute('title',"remove")
+                            td1.setAttribute('data-id',d.id)
+                            a1.setAttribute('href','#')
+                            i1.setAttribute('class','fa fa-times')
+                            i1.setAttribute('onclick',`removeProduct('${d.id}')`)
+                            a1.appendChild(i1)
+                            td1.appendChild(a1)
+                            tr.appendChild(td1)
+
+                            td2.setAttribute('class','li-product-thumbnail')
+                            img2.setAttribute('src',d.image)
+                            img2.setAttribute('alt',d.name)
+                            a2.setAttribute('href','#')
+                            a2.appendChild(img2)
+                            td2.appendChild(a2)
+                            tr.appendChild(td2)
+
+                            td3.setAttribute('class','li-product-name')
+                            a3.setAttribute('href','#')
+                            a3.innerText=d.name
+                            td3.appendChild(a3)
+                            tr.appendChild(td3)
+
+                            td4.setAttribute('class','li-product-price')
+                            span4.setAttribute('class','amount')
+                            span4.innerText='$'+d.price
+                            td4.appendChild(span4)
+                            tr.appendChild(td4)
+
+                            td5.setAttribute('class','li-product-stock-status')
+                            span5.setAttribute('class','in-stock')
+                            span5.innerText='In stock'
+                            td5.appendChild(span5)
+                            tr.appendChild(td5)
+
+                            td6.setAttribute('class','li-product-add-cart')
+                            span6.setAttribute('class','add-to-cart-link')
+                            span6.setAttribute('id',d.id)
+                            span6.setAttribute('onclick',`cartUpdate('${d.id}')`)
+                            span6.innerText='Add to Cart'
+                            td6.appendChild(span6)
+                            tr.appendChild(td6)
+                            document.querySelector(".tbody").appendChild(tr)
+                        });
+                        
                 const wishdetails=async()=>{
-                const res = await fetch('/wishlistdetails', {
+                const resp = await fetch('/wishlistdetails', {
                     method: 'POST',
                     body: JSON.stringify({ _id: "<%=user===null?null: user._id %>" }),
                     headers: {
@@ -332,12 +365,11 @@
                     }
                 })
 
-                const data = await res.json()
+                const data = await resp.json()
                 const wishlistCount = data.wishlist.length
                 document.querySelectorAll('.wishlist-item-count')[0].textContent = wishlistCount ?? 0
             }
-            window.addEventListener('load',async()=>{
-                const res = await fetch('/cartDetails', {
+                const respo = await fetch('/cartDetails', {
                     method: 'POST',
                     body: JSON.stringify({ _id: "<%=user===null? null : user._id %>" }),
                     headers: {
@@ -345,10 +377,10 @@
                     }
                 })
 
-                const data = await res.json()
-                const cartCount = data.orders.length
+                const datas = await respo.json()
+                const cartCount = datas.cart.length
                 document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
-                document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
+                document.querySelector(".minicart-product-list").innerHTML = datas.cart.reduce((acc, product) => {
                     acc += `
                         <li>
                             <a href="/single-product" class="minicart-product-image">
@@ -364,63 +396,36 @@
                         </li>`
                     return acc
                 }, '')
-
-                const remove = document.querySelectorAll('button.close[data-id]')
-                const update = async (e) => {
-                    const productID = e.target.getAttribute('data-id');
-                    try {
-                        const response = await fetch('/remove', {
-                            method: 'POST',
-                            body: JSON.stringify({ id: productID, _id: "<%=user===null?null: user._id %>" }),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        })
-                        const details = await response.json()
-                        const res = await fetch('/cartDetails', {
-                            method: 'POST',
-                            body: JSON.stringify({ _id: "<%= user===null ?null: user._id %>" }),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        })
-
-                        const data = await res.json()
-                        const cartCount = data.orders.length
-                        document.querySelectorAll('.cart-item-count')[1].textContent = cartCount ?? 0
-
-                        document.querySelector(".minicart-product-list").innerHTML = data.orders.reduce((acc, product) => {
-                            acc += `<li>
-                                    <a href="/single-product" class="minicart-product-image">
-                                        <img src="${product.image}" alt="cart products">
-                                    </a>
-                                    <div class="minicart-product-details">
-                                        <h6><a href="/single-product">${product.name}</a></h6>
-                                        <span>${product.price} x ${product.count}</span>
-                                    </div>
-                                    <button class="close" data-id="${product.id}">
-                                        <i class="fa fa-close" data-id="${product.id}"></i>
-                                    </button>
-                                </li>`
-                            return acc
-                        }, '')
-                        window.location.reload()
-                    } catch (e) {
-                        alert("Can't remove item from cart")
-                    }
-                remove.forEach(elmt => {
-                    elmt.addEventListener('click', e => {
-                      e.preventDefault();
-                       update(e)
-                    })
-                })
-            }
                 wishdetails()
             })
                 document.querySelector('.signout').addEventListener('click',async ()=>{
                 const res = await fetch('/signout', {method: 'POST',body:{}})
                 window.location.reload()
             })
+ 
+                    const cartUpdate=async(id)=>{
+                        const res = await fetch('/cartUpdate', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                id: id,
+                                uid:document.querySelector('.tbody').getAttribute("data-uid")
+                            }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        window.location.reload()
+                    }
+                    const removeProduct=async(id)=>{
+                        const response = await fetch('/wishlistremove', {
+                            method: 'POST',
+                            body: JSON.stringify({ id, _id: document.querySelector('.tbody').getAttribute("data-uid") }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        window.location.reload()
+                    }
         </script>
     </body>
 
